@@ -73,21 +73,21 @@ class Questions extends Component {
   }
 
   handleNextButton() {
-    const { Nquestion } = this.state;
+    const { Nquestions } = this.state;
 
     const MAX_QUESTIONS = 4;
     const { history } = this.props;
-    if (Nquestion === MAX_QUESTIONS) {
+    if (Nquestions === MAX_QUESTIONS) {
       history.push('/feedback');
     }
 
     this.buttonsAnswers();
 
-    this.setState({
-      Nquestion: Nquestion + 1,
+    this.setState((prevState) => ({
+      Nquestions: prevState.Nquestions + 1,
       click: false,
       timer: 30,
-    });
+    }));
 
     const SECOND = 1000;
     this.timeOut = setInterval(() => {
