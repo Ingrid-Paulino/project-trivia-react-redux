@@ -3,7 +3,6 @@ export const USER = 'USER';
 export const QUESTIONS = 'QUESTIONS';
 export const SCORE_COUNT = 'SCORE_COUNT';
 export const TIMER_COUNT = 'TIMER_COUNT';
-export const NEXT_QUESTION = 'NEXT_QUESTION';
 
 export const getToken = (token) => ({
   type: GET_TOKEN,
@@ -23,13 +22,9 @@ export const questions = (results) => ({
   results,
 });
 
-export const nextQuestion = () => ({
-  type: NEXT_QUESTION,
-});
-
 export const scores = (score) => ({
   type: SCORE_COUNT,
-  score,
+  scorePoint: score,
 });
 
 export const timerCount = (timer) => ({

@@ -1,7 +1,7 @@
 import { USER, SCORE_COUNT } from '../actions';
 
 const INITIAL_STATE = {
-  username: '',
+  name: '',
   assertions: '',
   score: 0,
   email: '',
@@ -12,13 +12,13 @@ function user(state = INITIAL_STATE, action) {
   case USER:
     return {
       ...state,
-      username: action.payload.username,
+      name: action.payload.username,
       email: action.payload.email,
     };
   case SCORE_COUNT:
     return {
       ...state,
-      score: action.score,
+      score: action.scorePoint,
     };
   default:
     return state;

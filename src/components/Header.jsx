@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 
 class Header extends Component {
   render() {
-    const { username } = this.props;
+    const { name, score } = this.props;
     return (
       <>
         <img src="" alt="imagem" data-testid="header-profile-picture" />
         <div>
           <p data-testid="header-player-name">
-            { username }
+            { name }
           </p>
           <p data-testid="header-score">
-            0
+            { score }
           </p>
         </div>
       </>
@@ -22,11 +22,13 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  username: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  username: state.user.username,
+  name: state.user.name,
+  score: state.user.score,
 });
 
 export default connect(mapStateToProps, null)(Header);

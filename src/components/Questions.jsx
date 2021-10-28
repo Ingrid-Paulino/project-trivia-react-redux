@@ -11,6 +11,7 @@ class Questions extends Component {
 
     this.state = {
       order: 0,
+      // questions: [],
       Nquestions: 0,
       click: false,
       timer: 30,
@@ -73,13 +74,15 @@ class Questions extends Component {
 
   handleNextButton() {
     const { Nquestion } = this.state;
-    this.feedback();
+
     const MAX_QUESTIONS = 4;
     const { history } = this.props;
     if (Nquestion === MAX_QUESTIONS) {
       history.push('/feedback');
     }
+
     this.buttonsAnswers();
+
     this.setState({
       Nquestion: Nquestion + 1,
       click: false,
@@ -109,14 +112,16 @@ class Questions extends Component {
 
     this.handleClickAnswer();
     const difficulty = this.questionDifficulty();
+    const storageUser = JSON.parse(localStorage.getItem('state'));
+    storageUser.player.score = score + rightAnswer + (timer * difficulty);
+    storageUser.player.assertions += 1;
+    localStorage.state = JSON.stringify(storageUser);
+    console.log(storageUser);
+
     scoreCount(score + rightAnswer + (timer * difficulty));
     this.setState({
       score: score + rightAnswer + (timer * difficulty),
     });
-    const storageUser = JSON.parse(localStorage.getItem('state'));
-    storageUser.user.score = score + rightAnswer + (timer * difficulty);
-    storageUser.user.assertions += 1;
-    localStorage.state = JSON.stringify(storageUser);
   }
 
   render() {
@@ -171,7 +176,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   timerAction: (timer) => (dispatch(timerCount(timer))),
-  scoreCount: (score) => (dispatch(scores(score))),
+  scoreCount: (scorePoint) => (dispatch(scores(scorePoint))),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);
