@@ -1,4 +1,4 @@
-import { NEXT_QUESTION, QUESTIONS, TIMER_COUNT } from '../actions';
+import { QUESTIONS, TIMER_COUNT } from '../actions';
 
 const INITIAL_STATE = {
   questions: [],
@@ -12,12 +12,6 @@ function questions(state = INITIAL_STATE, action) {
     return {
       ...state,
       ...action.results,
-      isFetching: false,
-    };
-  case NEXT_QUESTION:
-    return {
-      ...state,
-      nextQuestion: state.nextQuestion + 1,
       isFetching: false,
     };
   case TIMER_COUNT:

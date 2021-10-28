@@ -9,7 +9,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      username: '',
+      name: '',
       email: '',
       isEmailValid: false,
     };
@@ -36,15 +36,15 @@ class Login extends Component {
   async handleClick(event) {
     event.preventDefault();
     const { token, history, user } = this.props;
-    const { username, email } = this.state;
-    user(username, email);
+    const { name, email } = this.state;
+    user(name, email);
     await this.tokenApi();
     await token(this.state);
     history.push('/Trivia');
 
     const userDetails = {
-      user: {
-        username,
+      player: {
+        name,
         assertions: 0,
         score: 0,
         gravatarEmail: email,
@@ -62,15 +62,15 @@ class Login extends Component {
   }
 
   render() {
-    const { username, email, isEmailValid } = this.state;
+    const { name, email, isEmailValid } = this.state;
     const minChar = 1;
     return (
       <div>
         <Input
           type="text"
-          id="username"
+          id="name"
           dataTestId="input-player-name"
-          name={ username }
+          name={ name }
           onChange={ this.handleChange }
         />
         <Input
@@ -83,7 +83,7 @@ class Login extends Component {
         <button
           type="button"
           data-testid="btn-play"
-          disabled={ !(username.length >= minChar && isEmailValid) }
+          disabled={ !(name.length >= minChar && isEmailValid) }
           onClick={ this.handleClick }
         >
           Jogar
@@ -113,7 +113,7 @@ Login.propTypes = {
 
 const mapDispatchToProps = (dispatch) => ({
   token: (token) => dispatch(getToken(token)),
-  user: (username, email) => dispatch(userAction(username, email)),
+  user: (name, email) => dispatch(userAction(name, email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
