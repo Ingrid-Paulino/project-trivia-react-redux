@@ -102,7 +102,7 @@ class Login extends Component {
     );
   }
 }
-
+// comentario aleatorio
 Login.propTypes = {
   user: PropTypes.func.isRequired,
   token: PropTypes.func.isRequired,
